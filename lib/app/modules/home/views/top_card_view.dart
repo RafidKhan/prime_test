@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:prime_tect_test/app/data/shared_pref.dart';
 import 'package:prime_tect_test/app/data/styles.dart';
 import 'package:prime_tect_test/app/modules/home/controllers/home_controller.dart';
+import 'package:prime_tect_test/app/routes/app_pages.dart';
 
 class HomeTopCard extends GetView<HomeController> {
   @override
@@ -9,19 +11,13 @@ class HomeTopCard extends GetView<HomeController> {
     return Obx(() {
       return SizedBox(
         height: 212 * 1.4,
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         child: Stack(
           children: [
             Image.asset(
               "assets/images/home_header.png",
               height: 212,
-              width: MediaQuery
-                  .of(context)
-                  .size
-                  .width,
+              width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
             Padding(
@@ -39,11 +35,17 @@ class HomeTopCard extends GetView<HomeController> {
                     width: 42,
                     fit: BoxFit.cover,
                   ),
-                  Image.asset(
-                    "assets/images/notification.png",
-                    height: 24,
-                    width: 24,
-                    fit: BoxFit.cover,
+                  InkWell(
+                    onTap: () async {
+                      await SharedPref().removeAll();
+                      Get.offAllNamed(Routes.LOGIN);
+                    },
+                    child: Image.asset(
+                      "assets/images/notification.png",
+                      height: 24,
+                      width: 24,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ],
               ),
@@ -52,8 +54,8 @@ class HomeTopCard extends GetView<HomeController> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 height: 170,
-                margin: const EdgeInsets.symmetric(
-                    horizontal: horizontalMargin),
+                margin:
+                    const EdgeInsets.symmetric(horizontal: horizontalMargin),
                 decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),

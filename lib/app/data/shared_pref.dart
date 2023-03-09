@@ -6,6 +6,11 @@ class SharedPref {
     preferences.setString(key, value);
   }
 
+  Future removeAll() async {
+    final preferences = await SharedPreferences.getInstance();
+    preferences.clear();
+  }
+
   Future<String?> readString(String key) async {
     final preferences = await SharedPreferences.getInstance();
     return preferences.getString(key);
