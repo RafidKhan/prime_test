@@ -17,13 +17,9 @@ class PdfPageController extends GetxController {
   }
 
   Future getContacts() async {
-    print("GETTING DATA");
     try {
       if (await Permission.contacts.request().isGranted) {
         contacts.value = await ContactsService.getContacts();
-        contacts.forEach((element) {
-          log("DATA: ${element.toMap()}");
-        });
       }
     } catch (e) {
       throw e;
